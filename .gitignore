@@ -1,0 +1,32 @@
+# === Build Artifacts ===
+*.out
+*.exe
+*.o
+*.obj
+*.gch
+*.pch
+
+# === Executables (no extension, common on Unix/macOS) ===
+# This matches any file without an extension (likely compiled binaries)
+*/build/
+build/
+*.dSYM/
+*.dSYM/**
+
+# Ignore all files without an extension (risky if not careful)
+# But safer alternative is to use this pattern:
+!*.cpp
+!*.h
+!*.hpp
+!*.c
+!*.cc
+!*.txt
+!*.md
+# => only those will stay, rest (like compiled `hello`, `main`, etc.) ignored
+
+# === Debug Symbols ===
+*.dSYM
+*.dSYM/**
+
+# Named git files with filename build artifacts
+hello
