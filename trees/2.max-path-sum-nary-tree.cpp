@@ -14,32 +14,45 @@ public:
     }
 };
 
-int maxPathHelper(TreeNode *root, int &maxi)
-{
+int maxPathHelper(TreeNode* root, int& maxPath) {
     if (!root)
         return 0;
-    int ans = root->val;
-    int maxi1 = 0, maxi2 = 0;
-    int maxChildAns = 0;
-    for (int i = 0; i < root->children.size(); i++)
-    {
-        int sum = maxPathHelper(root->children[i], maxi);
-        if (sum > maxi1)
-        {
-            maxi2 = maxi1;
-            maxi1 = sum;
-            ans = root->val + maxi1 + maxi2;
+
+    int maxThroughCurrent = root->val;
+
+    // To store the top two maximum child path sums
+    int firstMaxChildSum = 0, secondMaxChildSum = 0;
+
+    // To return the best single child path sum upward
+    int bestChildPath = 0;
+
+    for (int i = 0; i < root->children.size(); i++) {
+        int childPathSum = maxPathHelper(root->children[i], maxPath);
+
+        // Update the top two child path sums
+        if (childPathSum > firstMaxChildSum) {
+            secondMaxChildSum = firstMaxChildSum;
+            firstMaxChildSum = childPathSum;
+
+            // Update maxThroughCurrent only when firstMax is updated
+            maxThroughCurrent = root->val + firstMaxChildSum + secondMaxChildSum;
         }
-        maxChildAns = max(maxChildAns, max(sum, 0));
+
+        // Track the max one-sided path to return upward
+        bestChildPath = max(bestChildPath, max(childPathSum, 0));
     }
-    maxi = max(maxi, ans);
-    return root->val + maxChildAns;
+
+    // Update the global maximum path sum if current is greater
+    maxPath = max(maxPath, maxThroughCurrent);
+
+    // Return the best one-sided path sum including current node
+    return root->val + bestChildPath;
 }
-int maxPathSum(TreeNode *root)
-{
-    int maxi = -1e8;
-    maxPathHelper(root, maxi);
-    return maxi;
+
+int maxPathSum(TreeNode* root) {
+    int maxPath = -1e8;
+    maxPathHelper(root, maxPath);
+    return maxPath;
 }
 
 int main()
