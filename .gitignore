@@ -28,9 +28,13 @@ build/
 *.dSYM
 *.dSYM/**
 
+# === VSC ===
+tempCodeRunnerFile.cpp
+
 # Named git files with filename build artifacts
 hello
 input
 1.all-traversals-in-one
 2.max-path-sum-nary-tree
 3.boundary-traversal
+4.top-view-binary-tree
