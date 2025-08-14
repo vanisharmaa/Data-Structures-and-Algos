@@ -39,3 +39,4 @@ input
 3.boundary-traversal
 4.top-view-binary-tree
 trees/5.bottom-view-binary-tree
+trees/6.print-all-root-to-leaf-paths
